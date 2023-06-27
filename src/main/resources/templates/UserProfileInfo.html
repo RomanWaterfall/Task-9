@@ -1,0 +1,54 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org%22%3E/-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title></title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+<!--  <th:block th:each="msg : ${messages}">-->
+<!--    <h1 th:text="${msg}"></h1>-->
+<!--  </th:block>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALL Users</title>
+</head>
+<body>
+<h1>ALL Users</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Age</th>
+    <th>Salary</th>
+
+  </tr>
+  <tbody>
+  <th:block th:each="user : ${users}">
+    <td th:text="${user.getId()}"></td>
+    <td th:text="${user.getName()}"></td>
+    <td th:text="${user.getSurname()}"></td>
+    <td th:text="${user.getAge()}"></td>
+    <td th:text="${user.getSalary()}"></td>
+
+    </tr>
+  </th:block>
+  <button onclick="location.href='/logout'">Logout</button>
+  </tbody>
+</table>
+
+<br>
+
+
+
+</body>
+</html>

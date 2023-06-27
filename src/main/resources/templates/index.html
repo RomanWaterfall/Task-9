@@ -1,11 +1,113 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:c="http://java.sun.com/xml/ns/javaee" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>ALL Users</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>ALL Users</h1>-->
+
+
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>Surname</th>-->
+<!--        <th>Age</th>-->
+<!--        <th>Salary</th>-->
+<!--        <th>Operations</th>-->
+<!--    </tr>-->
+
+
+<!--    <tr th:each="user : ${index}">-->
+
+<!--        <c:url var="updateButton" value="updateInfo">-->
+<!--            <c:param name="userId" value="${user.id}"/>-->
+<!--        </c:url>-->
+
+<!--        <c:url var="deleteButton" value="deleteUser">-->
+<!--            <c:param name="userId" value="${user.id}"/>-->
+<!--        </c:url>-->
+
+<!--        <td th:text="${user.name}"></td>-->
+<!--        <td th:text="${user.surname}"></td>-->
+<!--        <td th:text="${user.age}"></td>-->
+<!--        <td th:text="${user.salary}"></td>-->
+<!--        <td>-->
+<!--            <input type="hidden" id="id" name="id" th:value="${user.id}">-->
+<!--            <input type="button" value="Update"/>-->
+<!--            <input type="button" value="Update" onclick="location.href='/updateInfo?id=${user.id}'" />-->
+
+
+
+<!--            <form th:action="@{/deleteUser}" method="post">-->
+<!--                <input type="hidden" name="deleteId" th:value="${user.id}">-->
+<!--                <input type="submit" value="Delete" name="deleteButton">-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+
+
+<!--</table>-->
+
+<!--<br>-->
+
+<!--<input type="button" value="add"-->
+<!--       onclick="window.location.href = 'addNewUser'"/>-->
+
+
+<!--</body>-->
+
+
+<!--</html>-->
+
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>ALL Users</title>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
+<h1>ALL Users</h1>
 
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Salary</th>
+        <th>Operations</th>
+    </tr>
+    <tbody>
+    <th:block th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td th:text="${user.getSalary()}"></td>
+        <td>
+
+            <form th:action="@{/admin/deleteUser/{id}(id=${user.id})}">
+
+                <input type="hidden" name="deleteId" th:value="${user.id}">
+                <input type="submit" value="Delete" name="deleteButton">
+            </form>
+
+            <button>
+                <a th:href="@{/admin/updateInfo/{id}(id=${user.id})}">Update</a>
+            </button>
+        </td>
+    </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<br>
+
+<input type="button" value="Add" onclick="window.location.href = '/admin/addNewUser'">
 
 </body>
+<button onclick="location.href='/logout'">Logout</button>
 </html>
+
