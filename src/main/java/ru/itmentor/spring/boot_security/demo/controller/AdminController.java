@@ -10,17 +10,19 @@ import ru.itmentor.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
+
 @Controller
-public class MyController {
+@RequestMapping("/admin")
+public class AdminController {
     private final UserService userService;
 
     @Autowired
-    public MyController(UserService userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
 
     }
 
-    @GetMapping(value = "/admin")
+    @GetMapping(value = "/**")
     public String showALLUsers(Model model) {
 
         List<User> users = userService.getAllUser();
@@ -29,7 +31,7 @@ public class MyController {
         return "index";
     }
 
-    @RequestMapping("/admin/addNewUser")
+    @RequestMapping("/addNewUser")
     public String addNewUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
@@ -38,13 +40,13 @@ public class MyController {
 
     }
 
-    @PostMapping("/admin/user-info")
+    @PostMapping("/user-info")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/updateInfo/{id}")
+    @GetMapping("/updateInfo/{id}")
     public String updateUser(@PathVariable("id") int id, Model model) {
 
 
@@ -52,13 +54,13 @@ public class MyController {
         return "1";
     }
 
-    @PostMapping("/admin/1/{id}")
+    @PostMapping("/1/{id}")
     public String getUserInfo(@PathVariable("id") int id, @ModelAttribute("user") User user) {
         userService.updateUser(id, user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/deleteUser/{id}")
+    @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
