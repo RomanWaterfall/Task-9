@@ -30,8 +30,7 @@ public class User implements UserDetails {
     @Column(name = "salary")
     private Long salary;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

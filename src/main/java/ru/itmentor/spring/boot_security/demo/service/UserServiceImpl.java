@@ -43,25 +43,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDao.getUserById(id);
 
     }
+
     @Override
-    public    User findByUsername(String username) {
-        return   userDao.findByUsername(username);
+    public User findByName(String username) {
+        return userDao.findByName(username);
     }
 
     @Override
     @Transactional
-    public void updateUser(int id,User user) {
-        userDao.updateUser(id,user);
+    public void updateUser(int id, User user) {
+        userDao.updateUser(id, user);
     }
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByUsername(username);
+        User user = userDao.findByName(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found"));
         }
-        return  user;
+        return user;
     }
 
 }

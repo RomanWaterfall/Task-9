@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -37,14 +37,15 @@ public class UserDAOImpl implements UserDao {
 
     @Override
     public void updateUser(int id, User user) {
-        User user1 = getUserById((long) id);
         entityManager.merge(user);
     }
 
-    @Override
-    public User findByUsername(String name) {
-        return entityManager.createQuery("FROM User WHERE name=:name",
-                User.class).setParameter("name", name).getSingleResult();
-    }
 
+
+    public User findByName(String name) {
+        String query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.name = :name";
+        return entityManager.createQuery(query, User.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }
